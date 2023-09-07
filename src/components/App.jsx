@@ -44,16 +44,28 @@ export function App() {
   const onDeleteContact = id => {
     setContacts(prev => prev.filter(contact => contact.id !== id));
     setFilter('');
- 
+    Notify.info(`Contact was successfully deleted from your phonebook`, {
+      position: 'center-center',
+    });
   };
   
 
   const handleFilterChange = filterValue => {
     setFilter(filterValue);
+    // if ()) {
+    //   Notify.warning(
+    //     'No contacts matching your request',
+    //     {
+    //       position: 'center-center',
+    //     }
+    //   );
+    // }
   };
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
+
+   
   );
 
   useEffect(() => {

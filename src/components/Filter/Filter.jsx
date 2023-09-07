@@ -2,7 +2,7 @@ import React from 'react';
 import style from "./Filter.module.css"
 import PropTypes from 'prop-types';
 
-export default function Filter({ value, onChange }) {
+export default function Filter({ filter, onChange }) {
   return (
     <div className={style.filterWrapper}>
       <label className={style.filterLabel}>Find contacts by name</label>
@@ -11,7 +11,7 @@ export default function Filter({ value, onChange }) {
         type="text"
         name="filter"
         placeholder="Enter contact to search"
-        value={value}
+        value={filter}
         onChange={event => onChange(event.target.value)}
       ></input>
     </div>
