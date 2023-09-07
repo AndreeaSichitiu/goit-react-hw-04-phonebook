@@ -1,31 +1,24 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
+ 
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
-
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = event => {
+export function ContactForm ({onAddContact}) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  
+    const handleSubmit = event => {
+    
     event.preventDefault();
-    const form = event.currentTarget;
-    this.props.handleSubmit(this.state);
-    form.reset();
+    onAddContact(name, number)
+    setName('');
+    setNumber('');
   };
-
-  render() {
-    const { name, number } = this.state;
+ 
     return (
       <div className={style.phonebookWrapper}>
         <h1>Phonebook</h1>
-        <form className={style.contactForm} onSubmit={this.handleSubmit}>
+        <form className={style.contactForm} onSubmit={handleSubmit}>
           <label className={style.formLabel}>Name</label>
           <input
             className={style.phonebookInput}
@@ -34,8 +27,8 @@ export class ContactForm extends Component {
             placeholder="Enter name"
             pattern="^[a-zA-Z]+(([' -][a-zA-Z ])?[a-zA-Z]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            value={name}
-            onChange={this.handleChange}
+           
+            onChange={event => setName(event.target.value)}
             required
           ></input>
           <label className={style.formLabel}>Phone Number</label>
@@ -46,8 +39,8 @@ export class ContactForm extends Component {
             placeholder="Enter phone number"
             pattern="^[a-zA-Z]+(([' -][a-zA-Z ])?[a-zA-Z]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            value={number}
-            onChange={this.handleChange}
+           
+            onChange={event => setNumber(event.target.value)}
             required
           ></input>
           <button className={style.formButton} type="submit">
@@ -57,7 +50,7 @@ export class ContactForm extends Component {
       </div>
     );
   }
-}
+
 
 ContactForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

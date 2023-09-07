@@ -14,7 +14,7 @@ export default function ContactItem({ contacts, onDeleteContact }) {
         <button
           type="button"
           className={style.formButton}
-          onClick={() => onDeleteContact(contacts.id, contacts.name)}
+          onClick={() => onDeleteContact(contacts.id)}
         >
           Delete
         </button>
