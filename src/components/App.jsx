@@ -48,25 +48,20 @@ export function App() {
       position: 'center-center',
     });
   };
-  
 
   const handleFilterChange = filterValue => {
     setFilter(filterValue);
-    // if ()) {
-    //   Notify.warning(
-    //     'No contacts matching your request',
-    //     {
-    //       position: 'center-center',
-    //     }
-    //   );
-    // }
   };
 
   const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-
-   
+    contact.name.toLowerCase().trim().includes(filter.toLowerCase())
   );
+
+  if (filter.toLowerCase() && !filteredContacts.length) {
+    Notify.warning('No contacts matching your request', {
+      position: 'center-center',
+    });
+  }
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
